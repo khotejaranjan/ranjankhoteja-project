@@ -22,17 +22,23 @@
     </div>
     <div class="levelOneScreen screen">
         <!-- Level One screen content  -->
-<audio class="zebraSound" src="./images/zebrasound.mp3"></audio>
+<audio class="zebraSound" src="./sounds/zebrasound.mp3"></audio>
+<audio class="lionSound" src="./sounds/lionsound.mp3"></audio>
         <div class="timer">30</div>
+        <div class="score">Score: 0</div>
+        <div class="best">Best: 0</div>
+        <div class="message hidden"></div>
          <button class="tryAgainBtn hidden">Try again 🔁</button>
     </div>
 
     <div class="finalScreen screen">
         <!-- Final screen content  -->
-        <h1>What a day to be alive </h1>
+        <h1>Another day of being alive </h1>
+            <p class="finalScore">I lived for: 0 days</p>
         <button class="playAgain"> Play Again</button>
     </div>
     <script src="./js/lion.js"></script>
+    <script src="./js/zebra.js"></script>
     <script src="./js/levelone.js"></script>
     <script src="./js/index.js"></script>  
 </body>

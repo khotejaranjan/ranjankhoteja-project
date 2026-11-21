@@ -4,7 +4,7 @@ class Lion {
     this.x = x;                // horizontal position
     this.y = y;                // vertical position
     this.width = 110;           // lion width in pixels
-    this.height = 30;          // lion height in pixels
+    this.height = 60;          // lion height in pixels
     this.speed = speed;        // pixels moved per frame (negative = moving down)
     this.image = "https://i.pinimg.com/originals/c1/0f/09/c10f09d7fe6f756c8abf441c92a0ba3c.gif";
 
@@ -12,7 +12,7 @@ class Lion {
     this.element.style.position = "absolute";
     this.element.style.width = `${this.width}px`;
     this.element.style.height = `${this.height}px`;
-    this.element.style.backgroundImage = `url('${this.image}')`;   // FIX: use the lion GIF, not tree.png
+    this.element.style.backgroundImage = `url('${this.image}')`;   
     this.element.style.backgroundSize = "cover";
     this.element.style.backgroundRepeat = "no-repeat";
     this.element.style.zIndex = "2";

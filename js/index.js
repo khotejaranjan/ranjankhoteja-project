@@ -22,3 +22,4 @@ playAgain.addEventListener("click", () => {
   finalScreen.style.display = "none";
   introductionScreen.style.display = "flex";
 });
+
