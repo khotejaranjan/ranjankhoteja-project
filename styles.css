@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;     /* Vertical centering */
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.screen {
+    width: 39vw;
+    height: 46vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border: 3px solid rgb(164, 12, 32);
+    position: relative;
+} 
+
+/*
+  The following screens are hidden by default and are intended to be shown or hidden dynamically via JavaScript.
+*/
+.levelOneScreen, 
+.finalScreen {
+    display: none;
+}
+
+
+.introductionScreen {
+    width: 90vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://i.pinimg.com/originals/69/8e/48/698e48f4d6b88b556bc6c96b62bfe2df.gif');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.introductionScreen h1,
+.introductionScreen p,
+.introductionScreen ul {
+    color: rgba(255, 255, 255, 0.5);   /* white text at 50% see-through */
+}
+
+
+.levelOneScreen {
+  position: relative;
+  width: 90vw;
+  height: 50vh;
+}
+
+.levelOneScreen {
+  background-image: url('https://i.pinimg.com/originals/2f/10/ce/2f10ce69b96c0611989308b0abc68e70.gif');
+  background-size: 100% 100%;   /* stretch to fill the whole screen */
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.levelOneScreen h1 {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.5);   /* white text at 50% see-through */
+  pointer-events: none;              /* clicks and keys pass through the text */
+  z-index: 1;                        /* stays behind the zebra (10) and lions (2) */
+}
+
+.levelOneScreen .timer {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-family: 'Bungee', cursive;
+  font-size: clamp(2rem, 4vw, 4rem);
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.levelOneScreen .tryAgainBtn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);       /* centers the button horizontally */
+  z-index: 1; 
+}
+
+.finalScreen {
+  width: 90vw;
+  height: 50vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: #f2f0e9;
+  text-align: top;
+  background-image: url('https://media.baamboozle.com/uploads/images/42374/1654225316_173978_gif-url.gif');
+  background-size: 20% 100%;   /* stretch to fill the whole screen */
+}
+
+.finalScreen h1 {
+  font-size: 3rem;
+  color: rgb(164, 12, 32);
+}
+
+.hidden {
+  display: none !important;
+}
+/* General text */
+/* font-family for body is now included in the main body selector */
+
+/* Titles */
+h1, h2, h3 {
+    font-weight: 900;
+    font-family: 'Bungee', cursive;
+    letter-spacing: 4px;                 /* 10px gets too wide once the text is bigger */
+    font-size: clamp(2rem, 4vw, 4rem);   /* min 2rem, grows with screen width, max 4rem */
+    text-align: center;
+}
+
+p, li {
+    font-size: clamp(1.1rem, 2vw, 2rem);
+    font-weight: 900;
+    line-height: 1.5;
+}
+/* Buttons */
+button {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: clamp(1.1rem, 2vw, 2rem);
+    padding: 10px 24px;                  /* bigger button to match the bigger text */
+    cursor: pointer;
+}

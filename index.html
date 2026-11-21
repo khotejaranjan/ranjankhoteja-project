@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My life as a Zebra</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <div class="introductionScreen screen">
+        <!-- Introduction screen  -->
+        <h1>Welcome to the Safari world</h1>
+        <p>Use your arrow keys:</p>
+        <ul>
+            <li>⬅️ - face back</li>
+            <li>⬆️ - move up </li>
+            <li>⬇️ - move down</li>
+            <li>➡️ - forward</li>
+        </ul>
+        <button class="startBtn">Start ▶️</button>
+        
+    </div>
+    <div class="levelOneScreen screen">
+        <!-- Level One screen content  -->
+<audio class="zebraSound" src="./images/zebrasound.mp3"></audio>
+        <div class="timer">30</div>
+         <button class="tryAgainBtn hidden">Try again 🔁</button>
+    </div>
+
+    <div class="finalScreen screen">
+        <!-- Final screen content  -->
+        <h1>What a day to be alive </h1>
+        <button class="playAgain"> Play Again</button>
+    </div>
+    <script src="./js/lion.js"></script>
+    <script src="./js/levelone.js"></script>
+    <script src="./js/index.js"></script>  
+</body>
+</html>
+
