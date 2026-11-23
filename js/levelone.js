@@ -140,9 +140,6 @@ class LevelOne {
 
 
 
-
-
-
 stopSound() {
   this.zebraSound.pause();             // stop playing
   this.zebraSound.currentTime = 0;     // rewind to the start for next time
