@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
 }
-
+--------------------------------------------------------------------------------------------------------------------------------
+/* ALL PAGE */
 body {
     display: flex;
     justify-content: center; /* Horizontal centering */
@@ -11,7 +12,8 @@ body {
     margin: 0;
     font-family: 'Fredoka', sans-serif;
 }
-
+--------------------------------------------------------------------------------------------------------------------------------
+/*ALL SCREENS */
 .screen {
     width: 39vw;
     height: 46vh;
@@ -20,16 +22,14 @@ body {
     border: 3px solid rgb(164, 12, 32);
     position: relative;
 } 
-
-/*
-  The following screens are hidden by default and are intended to be shown or hidden dynamically via JavaScript.
-*/
+--------------------------------------------------------------------------------------------------------------------------------
+/* TO HIDE Level one and Final screen */
 .levelOneScreen, 
 .finalScreen {
     display: none;
 }
-
-
+--------------------------------------------------------------------------------------------------------------------------------
+/* INTRODUCTION SCREEN */
 .introductionScreen {
     width: 90vw;
     height: 50vh;
@@ -44,13 +44,14 @@ body {
     background-size: 100% 100%;
     overflow: hidden;
 }
+
 .introductionScreen h1,
 .introductionScreen p,
 .introductionScreen ul {
     color: rgba(255, 255, 255, 0.5);   /* white text at 50% see-through */
 }
-
-
+--------------------------------------------------------------------------------------------------------------------------------
+/*LEVEL ONE SCREEN  */
 .levelOneScreen {
   position: relative;
   width: 90vw;
@@ -72,7 +73,7 @@ body {
   width: 100%;
   color: rgba(255, 255, 255, 0.5);   /* white text at 50% see-through */
   pointer-events: none;              /* clicks and keys pass through the text */
-  z-index: 1;                        /* stays behind the zebra (10) and lions (2) */
+  z-index: 1;                        /* to decide which element is drawn on top when two elements overlap on the screen. */
 }
 
 .levelOneScreen .timer {
@@ -120,7 +121,8 @@ body {
   transform: translateX(-50%);       /* centers the button horizontally */
   z-index: 1; 
 }
-
+--------------------------------------------------------------------------------------------------------------------------------
+/* FINAL SCREEN */
 .finalScreen {
   width: 90vw;
   height: 50vh;
@@ -142,10 +144,8 @@ body {
 .hidden {
   display: none !important;
 }
-/* General text */
-/* font-family for body is now included in the main body selector */
-
-/* Titles */
+--------------------------------------------------------------------------------------------------------------------------------
+/* TITLES */
 h1, h2, h3 {
     font-weight: 900;
     font-family: 'Bungee', cursive;
@@ -159,7 +159,7 @@ p, li {
     font-weight: 900;
     line-height: 1.5;
 }
-/* Buttons */
+
 button {
     font-family: 'Fredoka', sans-serif;
     font-weight: 600;
