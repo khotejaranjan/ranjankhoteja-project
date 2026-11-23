@@ -19,8 +19,8 @@ class LevelOne {
     this.hasMoved = false;                                 // becomes true when the zebra first moves
     this.nextSpawnTime = 0;                                // time (ms) when the next lion should appear
     this.delayMin = 1000;                                  // shortest wait between lions (ms)
-    this.delayMax = 3000;                                  // longest wait between lions (ms)
-    this.maxLions = 8;                                     // most lions allowed on screen at once
+    this.delayMax = 2000;                                  // longest wait between lions (ms)
+    this.maxLions = 18;                                     // most lions allowed on screen at once
     this.zebraSound.volume = 0.5;          // volume from 0 (silent) to 1 (full)
     this.lionSound.volume = 0.8;          // volume from 0 (silent) to 1 (full)
 
@@ -30,7 +30,7 @@ class LevelOne {
       if (!this.isRunning || !this.zebras) return;         // ignore keys if the game isn't running
       if (e.key.startsWith("Arrow")) e.preventDefault();   // stop arrow keys from scrolling the page
 
-      const step = 10;                                     // pixels moved per key press
+      const step = 12;                                     // pixels moved per key press
       if (e.key === "ArrowRight") { this.zebras.x += step; this.zebras.facing = 1; }  // move right, face right
       if (e.key === "ArrowLeft")  { this.zebras.x -= step; this.zebras.facing = -1; } // move left, face left
       if (e.key === "ArrowUp")    this.zebras.y -= step;   // move up
@@ -88,7 +88,7 @@ class LevelOne {
 
     const y = bandTop + Math.random() * (bandBottom - bandTop - lionHeight); // random y inside the band
     const x = this.screen.offsetWidth;                     // start at the right edge of the screen
-    const speed = 3 + Math.floor(Math.random() * 6);       // random speed from 3 to 8
+    const speed = 3 + Math.floor(Math.random() * 5);       // random speed from 3 to 8
 
     this.lions.push(new Lion(this.screen, x, y, speed));   // create the lion and add it to the list
   }                                                        // end of spawnLion
@@ -138,43 +138,7 @@ class LevelOne {
   requestAnimationFrame(() => this.animate());           // schedule the next frame
 }
 
-collides(zebra, lion) {
-  // Settings you can change (in pixels)
-  const sameLine = 20;          // max height difference between the two middles
-  const overlapNeeded = 20;     // how far the zebra must push INTO the lion before it counts
 
-  // Step 1: the middle height of each animal
-  const zebraMiddleY = zebra.y + zebra.height / 2;
-  const lionMiddleY = lion.y + lion.height / 2;
-
-  // Step 2: the sideways edges
-  const zebraLeft = zebra.x;
-  const zebraRight = zebra.x + zebra.width;
-  const lionLeft = lion.x;
-  const lionRight = lion.x + lion.width;
-
-  // Step 3: must be almost exactly on the same line
-  if (Math.abs(zebraMiddleY - lionMiddleY) > sameLine) {
-    return false;                                       // different lines: no hit
-  }
-
-  // Step 4: how much do they overlap sideways?
-  const rightMostLeftEdge = Math.max(zebraLeft, lionLeft);     // the later of the two left edges
-  const leftMostRightEdge = Math.min(zebraRight, lionRight);   // the earlier of the two right edges
-  const overlap = leftMostRightEdge - rightMostLeftEdge;       // size of the shared part (negative = not touching)
-
-  if (overlap < overlapNeeded) {
-    return false;                                       // only barely touching: no hit
-  }
-
-  // Step 5: must be face to face (the lions run left, so the zebra must face right)
-  if (zebra.facing !== 1) {
-    return false;
-  }
-
-  // Step 6: same line, deep overlap, face to face
-  return true;
-}
 
 
 

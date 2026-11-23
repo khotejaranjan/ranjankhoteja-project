@@ -3,6 +3,7 @@ const levelOneScreen = document.querySelector(".levelOneScreen");
 const finalScreen = document.querySelector(".finalScreen");
 const startBtn = document.querySelector(".startBtn");
 const tryAgainBtn = document.querySelector(".tryAgainBtn");
+const continueBtn = document.querySelector(".continueBtn");
 const playAgain = document.querySelector(".playAgain");
 
 const levelOne = new LevelOne();
@@ -17,6 +18,9 @@ tryAgainBtn.addEventListener("click", () => {
   levelOne.start();
 });
 
+continueBtn.addEventListener("click", () => {
+  levelTwo.start();
+});
 
 playAgain.addEventListener("click", () => {
   finalScreen.style.display = "none";
