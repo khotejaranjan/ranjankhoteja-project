@@ -138,7 +138,43 @@ class LevelOne {
   requestAnimationFrame(() => this.animate());           // schedule the next frame
 }
 
+collides(zebra, lion) {
+  // Settings you can change (in pixels)
+  const sameLine = 20;          // max height difference between the two middles
+  const overlapNeeded = 20;     // how far the zebra must push INTO the lion before it counts
 
+  // Step 1: the middle height of each animal
+  const zebraMiddleY = zebra.y + zebra.height / 2;
+  const lionMiddleY = lion.y + lion.height / 2;
+
+  // Step 2: the sideways edges
+  const zebraLeft = zebra.x;
+  const zebraRight = zebra.x + zebra.width;
+  const lionLeft = lion.x;
+  const lionRight = lion.x + lion.width;
+
+  // Step 3: must be almost exactly on the same line
+  if (Math.abs(zebraMiddleY - lionMiddleY) > sameLine) {
+    return false;                                       // different lines: no hit
+  }
+
+  // Step 4: how much do they overlap sideways?
+  const rightMostLeftEdge = Math.max(zebraLeft, lionLeft);     // the later of the two left edges
+  const leftMostRightEdge = Math.min(zebraRight, lionRight);   // the earlier of the two right edges
+  const overlap = leftMostRightEdge - rightMostLeftEdge;       // size of the shared part (negative = not touching)
+
+  if (overlap < overlapNeeded) {
+    return false;                                       // only barely touching: no hit
+  }
+
+  // Step 5: must be face to face (the lions run left, so the zebra must face right)
+  if (zebra.facing !== 1) {
+    return false;
+  }
+
+  // Step 6: same line, deep overlap, face to face
+  return true;
+}
 
 stopSound() {
   this.zebraSound.pause();             // stop playing

@@ -77,9 +77,7 @@ An enemy. It starts at the right edge and moves left by its `speed` every frame.
 If you change the area in one place, change it in the other so the lions can still reach the zebra.
 
 ## Credits
-
-- Zebra and lion animations and the background images are linked from Pinterest and Vecteezy. 
-Images Link here: 
+- Images Link here: 
 1. Introudction screen background : https://i.pinimg.com/originals/69/8e/48/698e48f4d6b88b556bc6c96b62bfe2df.gif
 2. Level one screen background: https://i.pinimg.com/originals/2f/10/ce/2f10ce69b96c0611989308b0abc68e70.gif
 3. Zebra: https://i.pinimg.com/originals/f4/30/57/f4305767fe8cc6128a2628972b8f304c.gif
@@ -88,3 +86,5 @@ Images Link here:
 
 - Fonts: [Bungee](https://fonts.google.com/specimen/Bungee) and [Fredoka](https://fonts.google.com/specimen/Fredoka) from Google Fonts.
 - Sounds credit: https://elevenlabs.io/sound-effects/zebra 
+
+Thank you!
