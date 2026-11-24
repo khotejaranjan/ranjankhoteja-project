@@ -41,25 +41,25 @@ class LevelOne {
         this.startTime = performance.now();                // the 20 second countdown starts now
         this.nextSpawnTime = performance.now() + 1000;     // first lion appears 1 second later
         this.zebraSound.currentTime = 0;     // rewind to the start
-        this.zebraSound.play();              // NEW: play the sound
-        //this.zebraSound.volume = 0.5;    // volume from 0 (silent) to 1 (full); put this in the constructor
-        //this.zebraSound.pause();         // stop the sound
-      }                                                    // end of first-move block
+        this.zebraSound.play();              // play the sound
+      
+      }                                                    
 
       this.zebras.x = Math.max(0, Math.min(this.zebras.x, this.screen.offsetWidth - this.zebras.width));   // keep x between 0 and the right edge
       const limits = this.getZebraLimits();                                        // get the top and bottom limits
       this.zebras.y = Math.max(limits.top, Math.min(this.zebras.y, limits.bottom)); // keep y between the two limits
       this.zebras.updatePosition();                        // redraw the zebra at its new position
     });                                                    // end of keydown listener
-  }                                                        // end of constructor
+  }                                                       
+ // end of constructor defining the elemnts in Level One
 
   start() {                                                // starts (or restarts) the level
-    this.stopSound();                    // NEW
+    this.stopSound();                                      //  sound
     this.tryAgainBtn.classList.add("hidden");              // hide the try again button
     this.timerEl.textContent = this.timeLimit;
-    this.score = 0;                                       // NEW: back to zero
-    this.scoreEl.textContent = "Score: 0";                // NEW: show zero again
-    this.messageEl.classList.add("hidden");                    // hide the old message
+    this.score = 0;                                       // to bring back to zero
+    this.scoreEl.textContent = "Score: 0";                // to show zero again
+    this.messageEl.classList.add("hidden");                    // to hide the old message
 
     if (this.zebras) this.zebras.remove();                 // delete the old zebra if restarting
     this.zebras = new Zebra(this.screen);                  // create a fresh zebra
@@ -77,7 +77,9 @@ class LevelOne {
 
     this.isRunning = true;                                 // turn the game on
     this.animate();                                        // start the game loop
-  }                                                        // end of start
+  }                                                        
+// end of game start
+
 
   spawnLion() {                                            // creates one lion
     if (this.lions.length >= this.maxLions) return;        // stop if there are already too many
@@ -91,7 +93,9 @@ class LevelOne {
     const speed = 3 + Math.floor(Math.random() * 5);       // random speed from 3 to 8
 
     this.lions.push(new Lion(this.screen, x, y, speed));   // create the lion and add it to the list
-  }                                                        // end of spawnLion
+  }                                                        
+// end of how lion will behave in the game
+
 
   animate() {                                              // the game loop, runs every frame
   if (!this.isRunning) return;                           // stop the loop if the game is over
@@ -114,7 +118,7 @@ class LevelOne {
 
   for (const lion of this.lions) {                       // check every lion
     if (this.collides(this.zebras, lion)) {              // zebra and lion overlap
-      return this.lose(true, lion);                            // true = caught by a lion (plays the roar)
+      return this.lose(true, lion);                     // true = caught by a lion (plays the roar sound)
     }
   }
 
@@ -139,7 +143,6 @@ class LevelOne {
 }
 
 collides(zebra, lion) {
-  // Settings you can change (in pixels)
   const sameLine = 20;          // max height difference between the two middles
   const overlapNeeded = 20;     // how far the zebra must push INTO the lion before it counts
 
@@ -172,7 +175,7 @@ collides(zebra, lion) {
     return false;
   }
 
-  // Step 6: same line, deep overlap, face to face
+  // Step 6: face to face
   return true;
 }
 
@@ -199,14 +202,13 @@ saveBest() {
 
   win() {                                                  // called when the zebra crosses the screen
     this.isRunning = false;                                // stop the game loop
-    this.saveBest();                 // NEW: save if it's a new record
+    this.saveBest();                                       // save if it's a new record
 
-    this.stopSound();                    // NEW: stop the sound when level one ends
+    this.stopSound();                                      // stop the sound when level one ends
     this.lions.forEach(lion => lion.remove());             // clear the lions from the level
     this.lions = [];                                       // empty the lion list
 
     const finalScoreEl = document.querySelector(".finalScore");   // find the score text on the final screen
-    //document.querySelector(".finalBest").textContent = "Best: " + this.bestScore;
     finalScoreEl.textContent = "Score: " + this.score;            // copy the score into it
 
     const finalScreen = document.querySelector(".finalScreen"); // find the final screen
@@ -214,19 +216,19 @@ saveBest() {
     finalScreen.style.display = "flex";                    // show the final screen
   }                                                        // end of win
 
-lose(caughtByLion, hitLion) {                                   // caughtByLion is true only when a lion hit the zebra
+lose(caughtByLion, hitLion) {                           // caughtByLion is true only when a lion hit the zebra
   this.isRunning = false;                              // stop the game loop
   this.stopSound();                                    // stop the zebra sound
-  this.saveBest();                 // NEW: save if it's a new record
+  this.saveBest();                                    // save if it's a new record
 
   if (caughtByLion) {  
     this.lionSound.currentTime = 0;                    // rewind to the start
     this.lionSound.play();                             // play the lion sound
-    this.messageEl.textContent = "The 🦁 got me";   // NEW: collision message
+    this.messageEl.textContent = "The 🦁 got me";   //collision message
   } else {                                                 // time ran out
-    this.messageEl.textContent = "My ⏰ is up, too old";         // NEW: time-up message
+    this.messageEl.textContent = "My ⏰ is up, too old";         // time-up message
   }
-  this.messageEl.classList.remove("hidden");               // NEW: show the message
+  this.messageEl.classList.remove("hidden");               // show the message
   
 
   this.tryAgainBtn.classList.remove("hidden");         // show the try again button

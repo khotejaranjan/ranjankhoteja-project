@@ -30,9 +30,9 @@ move() {
     return this.x + this.width < 0;   // true once the lion has fully left the left side
   }
 
-  updatePosition() {
-    this.element.style.left = `${this.x}px`;
-    this.element.style.top = `${this.y}px`;
+  updatePosition() {                           // Method to refres lion's position
+    this.element.style.left = `${this.x}px`;   // Horizontal position
+    this.element.style.top = `${this.y}px`;    // Vertical position
   }
 
   remove() {

@@ -76,6 +76,22 @@ An enemy. It starts at the right edge and moves left by its `speed` every frame.
 
 If you change the area in one place, change it in the other so the lions can still reach the zebra.
 
+### `LevelOne`
+The game itself:
+
+| Method | What it does |
+| --- | --- |
+| `start()` | Resets the score, timer, zebra and lions, then starts the loop |
+| `animate()` | The game loop, runs about 60 times per second |
+| `spawnLion()` | Creates one lion at the right edge at a random height |
+| `collides()` | Decides if the zebra and a lion hit each other |
+| `getZebraLimits()` | Gives the highest and lowest place the zebra can go |
+| `saveBest()` | Saves the best score in `localStorage` |
+| `saveScore()` / `showHistory()` | Keep and show the last 5 scores |
+| `win()` | Shows the final screen |
+| `lose()` | Plays the roar, shows a message and the Try again button |
+
+
 ## Credits
 - Images Link here: 
 1. Introudction screen background : https://i.pinimg.com/originals/69/8e/48/698e48f4d6b88b556bc6c96b62bfe2df.gif
