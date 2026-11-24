@@ -78,6 +78,13 @@ If you change the area in one place, change it in the other so the lions can sti
 
 ## Credits
 
-- Zebra and lion animations and the background images are linked from Pinterest and Vecteezy. Check their licenses before publishing the game.
+- Zebra and lion animations and the background images are linked from Pinterest and Vecteezy. 
+Images Link here: 
+1. Introudction screen background : https://i.pinimg.com/originals/69/8e/48/698e48f4d6b88b556bc6c96b62bfe2df.gif
+2. Level one screen background: https://i.pinimg.com/originals/2f/10/ce/2f10ce69b96c0611989308b0abc68e70.gif
+3. Zebra: https://i.pinimg.com/originals/f4/30/57/f4305767fe8cc6128a2628972b8f304c.gif
+4. Lion: https://i.pinimg.com/originals/c1/0f/09/c10f09d7fe6f756c8abf441c92a0ba3c.gif
+5. Final screen background: https://media.baamboozle.com/uploads/images/42374/1654225316_173978_gif-url.gif
+
 - Fonts: [Bungee](https://fonts.google.com/specimen/Bungee) and [Fredoka](https://fonts.google.com/specimen/Fredoka) from Google Fonts.
 - Sounds credit: https://elevenlabs.io/sound-effects/zebra 
