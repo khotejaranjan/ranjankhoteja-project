@@ -1,236 +1,236 @@
 class LevelOne {
-  constructor() {                                          // runs once when the level object is created
-    this.screen = document.querySelector(".levelOneScreen"); // find the level screen in the HTML
-    this.tryAgainBtn = this.screen.querySelector(".tryAgainBtn"); // find the try again button inside it
-    this.zebraSound = this.screen.querySelector(".zebraSound");   // find the audio tag in the HTML
-    this.lionSound = this.screen.querySelector(".lionSound");   // find the audio tag in the HTML
-    this.timerEl = this.screen.querySelector(".timer");    // the countdown display element
-    this.messageEl = this.screen.querySelector(".message");   // the message box
-    this.scoreEl = this.screen.querySelector(".score");   // the score display
-    this.bestEl = this.screen.querySelector(".best");                    // the best score display
-    this.bestScore = Number(localStorage.getItem("bestScore")) || 0;     // load the saved score, or 0 if there isn't one
-    this.bestEl.textContent = "Best: " + this.bestScore;                 // show it on screen
-    this.score = 0;                                       // points earned so far
-    this.timeLimit = 25;                                   // seconds allowed to cross
-    this.startTime = 0;                                    // when the countdown began (ms)
-    this.zebras = null;                                    // no zebra yet; created in start()
-    this.lions = [];                                       // list of lions currently on screen
-    this.isRunning = false;                                // the game loop is off until start()
-    this.hasMoved = false;                                 // becomes true when the zebra first moves
-    this.nextSpawnTime = 0;                                // time (ms) when the next lion should appear
-    this.delayMin = 1000;                                  // shortest wait between lions (ms)
-    this.delayMax = 2000;                                  // longest wait between lions (ms)
-    this.maxLions = 18;                                     // most lions allowed on screen at once
-    this.zebraSound.volume = 0.5;          // volume from 0 (silent) to 1 (full)
-    this.lionSound.volume = 0.8;          // volume from 0 (silent) to 1 (full)
+  constructor() {                                          
+    this.screen = document.querySelector(".levelOneScreen"); 
+    this.tryAgainBtn = this.screen.querySelector(".tryAgainBtn"); 
+    this.zebraSound = this.screen.querySelector(".zebraSound");   
+    this.lionSound = this.screen.querySelector(".lionSound");   
+    this.timerEl = this.screen.querySelector(".timer");    
+    this.messageEl = this.screen.querySelector(".message");   
+    this.scoreEl = this.screen.querySelector(".score");   
+    this.bestEl = this.screen.querySelector(".best");                    
+    this.bestScore = Number(localStorage.getItem("bestScore")) || 0;     
+    this.bestEl.textContent = "Best: " + this.bestScore;                 
+    this.score = 0;                                       
+    this.timeLimit = 25;                                   
+    this.startTime = 0;                                    
+    this.zebras = null;                                    
+    this.lions = [];                                       
+    this.isRunning = false;                                
+    this.hasMoved = false;                                 
+    this.nextSpawnTime = 0;                                
+    this.delayMin = 1000;                                  
+    this.delayMax = 2000;                                  
+    this.maxLions = 18;                                     
+    this.zebraSound.volume = 0.5;          
+    this.lionSound.volume = 0.8;          
 
     
 
-    document.addEventListener("keydown", (e) => {          // run this code on every key press
-      if (!this.isRunning || !this.zebras) return;         // ignore keys if the game isn't running
-      if (e.key.startsWith("Arrow")) e.preventDefault();   // stop arrow keys from scrolling the page
+    document.addEventListener("keydown", (e) => {          
+      if (!this.isRunning || !this.zebras) return;         
+      if (e.key.startsWith("Arrow")) e.preventDefault();   
 
-      const step = 12;                                     // pixels moved per key press
-      if (e.key === "ArrowRight") { this.zebras.x += step; this.zebras.facing = 1; }  // move right, face right
-      if (e.key === "ArrowLeft")  { this.zebras.x -= step; this.zebras.facing = -1; } // move left, face left
-      if (e.key === "ArrowUp")    this.zebras.y -= step;   // move up
-      if (e.key === "ArrowDown")  this.zebras.y += step;   // move down
+      const step = 12;                                     
+      if (e.key === "ArrowRight") { this.zebras.x += step; this.zebras.facing = 1; }  
+      if (e.key === "ArrowLeft")  { this.zebras.x -= step; this.zebras.facing = -1; } 
+      if (e.key === "ArrowUp")    this.zebras.y -= step;   
+      if (e.key === "ArrowDown")  this.zebras.y += step;   
 
-      if (!this.hasMoved && e.key.startsWith("Arrow")) {   // first arrow key press of this round
-        this.hasMoved = true;                              // remember the zebra has started moving
-        this.startTime = performance.now();                // the 20 second countdown starts now
-        this.nextSpawnTime = performance.now() + 1000;     // first lion appears 1 second later
-        this.zebraSound.currentTime = 0;     // rewind to the start
-        this.zebraSound.play();              // play the sound
+      if (!this.hasMoved && e.key.startsWith("Arrow")) {   
+        this.hasMoved = true;                              
+        this.startTime = performance.now();                
+        this.nextSpawnTime = performance.now() + 1000;     
+        this.zebraSound.currentTime = 0;     
+        this.zebraSound.play();              
       
       }                                                    
 
-      this.zebras.x = Math.max(0, Math.min(this.zebras.x, this.screen.offsetWidth - this.zebras.width));   // keep x between 0 and the right edge
-      const limits = this.getZebraLimits();                                        // get the top and bottom limits
-      this.zebras.y = Math.max(limits.top, Math.min(this.zebras.y, limits.bottom)); // keep y between the two limits
-      this.zebras.updatePosition();                        // redraw the zebra at its new position
-    });                                                    // end of keydown listener
+      this.zebras.x = Math.max(0, Math.min(this.zebras.x, this.screen.offsetWidth - this.zebras.width));   
+      const limits = this.getZebraLimits();                                        
+      this.zebras.y = Math.max(limits.top, Math.min(this.zebras.y, limits.bottom)); 
+      this.zebras.updatePosition();                        
+    });                                                    
   }                                                       
  // end of constructor defining the elemnts in Level One
 
-  start() {                                                // starts (or restarts) the level
-    this.stopSound();                                      //  sound
-    this.tryAgainBtn.classList.add("hidden");              // hide the try again button
+  start() {                                                
+    this.stopSound();                                      
+    this.tryAgainBtn.classList.add("hidden");              
     this.timerEl.textContent = this.timeLimit;
-    this.score = 0;                                       // to bring back to zero
-    this.scoreEl.textContent = "Score: 0";                // to show zero again
-    this.messageEl.classList.add("hidden");                    // to hide the old message
+    this.score = 0;                                       
+    this.scoreEl.textContent = "Score: 0";                
+    this.messageEl.classList.add("hidden");                    
 
-    if (this.zebras) this.zebras.remove();                 // delete the old zebra if restarting
-    this.zebras = new Zebra(this.screen);                  // create a fresh zebra
+    if (this.zebras) this.zebras.remove();                 
+    this.zebras = new Zebra(this.screen);                  
 
     const limits = this.getZebraLimits();
-    this.zebras.y = (limits.top + limits.bottom) / 2;     // start in the middle of the allowed area
-    this.zebras.updatePosition();                         // redraw the zebra there
+    this.zebras.y = (limits.top + limits.bottom) / 2;     
+    this.zebras.updatePosition();                         
 
-    this.lions.forEach(lion => lion.remove());             // delete all old lions from the page
-    this.lions = [];                                       // start with an empty lion list
-    this.hasMoved = false;                                 // lions and timer wait until the zebra moves
-    this.timerEl.textContent = this.timeLimit;             // show 20 again on every retry
-    this.lionSound.pause();                                // stop a roar still playing from the last round
+    this.lions.forEach(lion => lion.remove());             
+    this.lions = [];                                       
+    this.hasMoved = false;                                 
+    this.timerEl.textContent = this.timeLimit;             
+    this.lionSound.pause();                                
     this.lionSound.currentTime = 0;
 
-    this.isRunning = true;                                 // turn the game on
-    this.animate();                                        // start the game loop
+    this.isRunning = true;                                 
+    this.animate();                                        
   }                                                        
 // end of game start
 
 
-  spawnLion() {                                            // creates one lion
-    if (this.lions.length >= this.maxLions) return;        // stop if there are already too many
+  spawnLion() {                                            
+    if (this.lions.length >= this.maxLions) return;        
 
-    const lionHeight = 30;                                 // must match the Lion class height
-    const bandTop = this.screen.offsetHeight * 0.55;       // lions can appear from 60% of the screen height
-    const bandBottom = this.screen.offsetHeight * 0.95;    // down to 95% of the screen height
+    const lionHeight = 30;                                 
+    const bandTop = this.screen.offsetHeight * 0.55;       
+    const bandBottom = this.screen.offsetHeight * 0.95;    
 
-    const y = bandTop + Math.random() * (bandBottom - bandTop - lionHeight); // random y inside the band
-    const x = this.screen.offsetWidth;                     // start at the right edge of the screen
-    const speed = 3 + Math.floor(Math.random() * 5);       // random speed from 3 to 8
+    const y = bandTop + Math.random() * (bandBottom - bandTop - lionHeight); 
+    const x = this.screen.offsetWidth;                     
+    const speed = 3 + Math.floor(Math.random() * 5);       
 
-    this.lions.push(new Lion(this.screen, x, y, speed));   // create the lion and add it to the list
+    this.lions.push(new Lion(this.screen, x, y, speed));   
   }                                                        
 // end of how lion will behave in the game
 
 
-  animate() {                                              // the game loop, runs every frame
-  if (!this.isRunning) return;                           // stop the loop if the game is over
+  animate() {                                              
+  if (!this.isRunning) return;                           
 
-  const now = performance.now();                         // current time in milliseconds
-  if (this.hasMoved && now >= this.nextSpawnTime) {      // zebra has moved and the wait is over
-    this.spawnLion();                                    // create a lion
-    this.nextSpawnTime = now + this.delayMin + Math.random() * (this.delayMax - this.delayMin); // schedule the next one
+  const now = performance.now();                         
+  if (this.hasMoved && now >= this.nextSpawnTime) {      
+    this.spawnLion();                                    
+    this.nextSpawnTime = now + this.delayMin + Math.random() * (this.delayMax - this.delayMin); 
   }
 
-  this.lions.forEach(lion => lion.move());               // move every lion one step to the left
+  this.lions.forEach(lion => lion.move());               
 
-  this.lions = this.lions.filter(lion => {               // keep only lions that are still on screen
+  this.lions = this.lions.filter(lion => {               
     if (lion.isOffScreen()) {
-      lion.remove();                                     // delete its div from the page
-      return false;                                      // drop it from the list
+      lion.remove();                                     
+      return false;                                      
     }
-    return true;                                         // otherwise keep it
+    return true;                                         
   });
 
-  for (const lion of this.lions) {                       // check every lion
-    if (this.collides(this.zebras, lion)) {              // zebra and lion overlap
-      return this.lose(true, lion);                     // true = caught by a lion (plays the roar sound)
+  for (const lion of this.lions) {                       
+    if (this.collides(this.zebras, lion)) {              
+      return this.lose(true, lion);                     
     }
   }
 
-  if (this.hasMoved) {                                   // the clock only runs after the first move
-    const elapsed = (performance.now() - this.startTime) / 1000;         // seconds since the first move
-    const remaining = Math.max(0, Math.ceil(this.timeLimit - elapsed)); // whole seconds left
-    this.timerEl.textContent = remaining;                // update the countdown display
+  if (this.hasMoved) {                                   
+    const elapsed = (performance.now() - this.startTime) / 1000;         
+    const remaining = Math.max(0, Math.ceil(this.timeLimit - elapsed)); 
+    this.timerEl.textContent = remaining;                
 
-    this.score = Math.floor(elapsed);                    // 1 point per full second alive
-    this.scoreEl.textContent = "Score: " + this.score;   // show the score
+    this.score = Math.floor(elapsed);                    
+    this.scoreEl.textContent = "Score: " + this.score;   
 
-    if (remaining <= 0) {                                // time is up
-      return this.lose();                                // no roar, because no lion hit the zebra
+    if (remaining <= 0) {                                
+      return this.lose();                                
     }
   }
 
-  if (this.zebras.x + this.zebras.width >= this.screen.offsetWidth) { // zebra reached the right edge
-    return this.win();                                   // player wins
+  if (this.zebras.x + this.zebras.width >= this.screen.offsetWidth) { 
+    return this.win();                                   
   }
 
-  requestAnimationFrame(() => this.animate());           // schedule the next frame
+  requestAnimationFrame(() => this.animate());           
 }
 
 collides(zebra, lion) {
-  const sameLine = 20;          // max height difference between the two middles
-  const overlapNeeded = 20;     // how far the zebra must push INTO the lion before it counts
+  const sameLine = 20;          
+  const overlapNeeded = 20;     
 
-  // Step 1: the middle height of each animal
+  
   const zebraMiddleY = zebra.y + zebra.height / 2;
   const lionMiddleY = lion.y + lion.height / 2;
 
-  // Step 2: the sideways edges
+  
   const zebraLeft = zebra.x;
   const zebraRight = zebra.x + zebra.width;
   const lionLeft = lion.x;
   const lionRight = lion.x + lion.width;
 
-  // Step 3: must be almost exactly on the same line
+  
   if (Math.abs(zebraMiddleY - lionMiddleY) > sameLine) {
-    return false;                                       // different lines: no hit
+    return false;                                       
   }
 
-  // Step 4: how much do they overlap sideways?
-  const rightMostLeftEdge = Math.max(zebraLeft, lionLeft);     // the later of the two left edges
-  const leftMostRightEdge = Math.min(zebraRight, lionRight);   // the earlier of the two right edges
-  const overlap = leftMostRightEdge - rightMostLeftEdge;       // size of the shared part (negative = not touching)
+  
+  const rightMostLeftEdge = Math.max(zebraLeft, lionLeft);     
+  const leftMostRightEdge = Math.min(zebraRight, lionRight);   
+  const overlap = leftMostRightEdge - rightMostLeftEdge;       
 
   if (overlap < overlapNeeded) {
-    return false;                                       // only barely touching: no hit
+    return false;                                       
   }
 
-  // Step 5: must be face to face (the lions run left, so the zebra must face right)
+  
   if (zebra.facing !== 1) {
     return false;
   }
 
-  // Step 6: face to face
+  
   return true;
 }
 
 stopSound() {
-  this.zebraSound.pause();             // stop playing
-  this.zebraSound.currentTime = 0;     // rewind to the start for next time
+  this.zebraSound.pause();             
+  this.zebraSound.currentTime = 0;     
 }
 
 getZebraLimits() {
-  const zebraHeight = 55;                                    // must match the Zebra class height
-  const top = this.screen.offsetHeight * 0.55;               // highest the zebra can go (55% down the screen)
-  const bottom = this.screen.offsetHeight * 0.95 - zebraHeight;   // lowest the zebra's TOP edge can go, so its feet stay above 95%
-  return { top: top, bottom: bottom };                       // give both numbers back
+  const zebraHeight = 55;                                    
+  const top = this.screen.offsetHeight * 0.55;               
+  const bottom = this.screen.offsetHeight * 0.95 - zebraHeight;   
+  return { top: top, bottom: bottom };                       
 }
 
 saveBest() {
-  if (this.score > this.bestScore) {                       // is this round better than the saved best?
-    this.bestScore = this.score;                           // yes: remember it
-    localStorage.setItem("bestScore", this.bestScore);     // save it in the browser
-    this.bestEl.textContent = "Best: " + this.bestScore;   // update the screen
+  if (this.score > this.bestScore) {                       
+    this.bestScore = this.score;                           
+    localStorage.setItem("bestScore", this.bestScore);     
+    this.bestEl.textContent = "Best: " + this.bestScore;   
   }
 }
 
 
-  win() {                                                  // called when the zebra crosses the screen
-    this.isRunning = false;                                // stop the game loop
-    this.saveBest();                                       // save if it's a new record
+  win() {                                                  
+    this.isRunning = false;                                
+    this.saveBest();                                       
 
-    this.stopSound();                                      // stop the sound when level one ends
-    this.lions.forEach(lion => lion.remove());             // clear the lions from the level
-    this.lions = [];                                       // empty the lion list
+    this.stopSound();                                      
+    this.lions.forEach(lion => lion.remove());             
+    this.lions = [];                                       
 
-    const finalScoreEl = document.querySelector(".finalScore");   // find the score text on the final screen
-    finalScoreEl.textContent = "Score: " + this.score;            // copy the score into it
+    const finalScoreEl = document.querySelector(".finalScore");   
+    finalScoreEl.textContent = "Score: " + this.score;            
 
-    const finalScreen = document.querySelector(".finalScreen"); // find the final screen
-    this.screen.style.display = "none";                    // hide level one
-    finalScreen.style.display = "flex";                    // show the final screen
-  }                                                        // end of win
+    const finalScreen = document.querySelector(".finalScreen"); 
+    this.screen.style.display = "none";                    
+    finalScreen.style.display = "flex";                    
+  }                                                        
 
-lose(caughtByLion, hitLion) {                           // caughtByLion is true only when a lion hit the zebra
-  this.isRunning = false;                              // stop the game loop
-  this.stopSound();                                    // stop the zebra sound
-  this.saveBest();                                    // save if it's a new record
+lose(caughtByLion, hitLion) {                           
+  this.isRunning = false;                              
+  this.stopSound();                                    
+  this.saveBest();                                    
 
   if (caughtByLion) {  
-    this.lionSound.currentTime = 0;                    // rewind to the start
-    this.lionSound.play();                             // play the lion sound
-    this.messageEl.textContent = "The 🦁 got me";   //collision message
-  } else {                                                 // time ran out
-    this.messageEl.textContent = "My ⏰ is up, too old";         // time-up message
+    this.lionSound.currentTime = 0;                    
+    this.lionSound.play();                             
+    this.messageEl.textContent = "The 🦁 got me";   
+  } else {                                                 
+    this.messageEl.textContent = "My ⏰ is up, too old";         
   }
-  this.messageEl.classList.remove("hidden");               // show the message
+  this.messageEl.classList.remove("hidden");               
   
 
-  this.tryAgainBtn.classList.remove("hidden");         // show the try again button
+  this.tryAgainBtn.classList.remove("hidden");         
 }
 }

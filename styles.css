@@ -6,8 +6,8 @@
  ALL PAGE */
 body {
     display: flex;
-    justify-content: center; /* Horizontal centering */
-    align-items: center;     /* Vertical centering */
+    justify-content: center; 
+    align-items: center;     
     min-height: 100vh;
     margin: 0;
     font-family: 'Fredoka', sans-serif;
@@ -48,7 +48,7 @@ INTRODUCTION SCREEN */
 .introductionScreen h1,
 .introductionScreen p,
 .introductionScreen ul {
-    color: rgba(255, 255, 255, 0.5);   /* white text at 50% see-through */
+    color: rgba(255, 255, 255, 0.5);   
 }
 /*--------------------------------------------------------------------------------------------------------------------------------
 LEVEL ONE SCREEN  */
@@ -60,7 +60,7 @@ LEVEL ONE SCREEN  */
 
 .levelOneScreen {
   background-image: url('https://i.pinimg.com/originals/2f/10/ce/2f10ce69b96c0611989308b0abc68e70.gif');
-  background-size: 100% 100%;   /* stretch to fill the whole screen */
+  background-size: 100% 100%;   
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -71,9 +71,9 @@ LEVEL ONE SCREEN  */
   top: 10px;
   left: 0;
   width: 100%;
-  color: rgba(255, 255, 255, 0.5);   /* white text at 50% see-through */
-  pointer-events: none;              /* clicks and keys pass through the text */
-  z-index: 1;                        /* to decide which element is drawn on top when two elements overlap on the screen. */
+  color: rgba(255, 255, 255, 0.5);   
+  pointer-events: none;              
+  z-index: 1;                       
 }
 
 .levelOneScreen .timer {
@@ -102,15 +102,15 @@ LEVEL ONE SCREEN  */
   position: absolute;
   top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);       /* centers it exactly */
+  transform: translate(-50%, -50%);       
   padding: 12px 24px;
   font-family: 'Bungee', cursive;
   font-size: clamp(1.5rem, 3vw, 3rem);
   color: white;
-  background: rgba(164, 12, 32, 0.85);    /* semi-transparent red box */
+  background: rgba(164, 12, 32, 0.85);    
   border-radius: 8px;
   text-align: center;
-  z-index: 30;                            /* above the zebra and lions */
+  z-index: 30;                           
   pointer-events: none;
 }
 
@@ -118,7 +118,7 @@ LEVEL ONE SCREEN  */
   position: absolute;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);       /* centers the button horizontally */
+  transform: translateX(-50%);       
   z-index: 1; 
 }
 /* --------------------------------------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ FINAL SCREEN */
   background: #9a8e5c00;
   text-align: top;
   background-image: url('https://media.baamboozle.com/uploads/images/42374/1654225316_173978_gif-url.gif');
-  background-size: 20% 100%;   /* stretch to fill the whole screen */
+  background-size: 20% 100%;   
 }
 
 .finalScreen h1 {
@@ -149,8 +149,8 @@ FINAL SCREEN */
 h1, h2, h3 {
     font-weight: 900;
     font-family: 'Bungee', cursive;
-    letter-spacing: 4px;                 /* 10px gets too wide once the text is bigger */
-    font-size: clamp(2rem, 4vw, 4rem);   /* min 2rem, grows with screen width, max 4rem */
+    letter-spacing: 4px;                 
+    font-size: clamp(2rem, 4vw, 4rem);   
     text-align: center;
 }
 
@@ -165,6 +165,6 @@ button {
     font-weight: 600;
     letter-spacing: 1px;
     font-size: clamp(1.1rem, 2vw, 2rem);
-    padding: 10px 24px;                  /* bigger button to match the bigger text */
+    padding: 10px 24px;                  
     cursor: pointer;
 }

@@ -1,11 +1,11 @@
 class Lion {
   constructor(screen, x, y, speed) {
-    this.screen = screen;      // the screen div the lion lives in
-    this.x = x;                // horizontal position
-    this.y = y;                // vertical position
-    this.width = 110;           // lion width in pixels
-    this.height = 60;          // lion height in pixels
-    this.speed = speed;        // pixels moved per frame (negative = moving down)
+    this.screen = screen;      
+    this.x = x;                
+    this.y = y;                
+    this.width = 110;           
+    this.height = 60;          
+    this.speed = speed;        
     this.image = "https://i.pinimg.com/originals/c1/0f/09/c10f09d7fe6f756c8abf441c92a0ba3c.gif";
 
     this.element = document.createElement("div");
@@ -22,20 +22,20 @@ class Lion {
   }
 
 move() {
-    this.x -= this.speed;     // run to the left, toward the zebra
-    this.updatePosition();    // redraw at the new position
+    this.x -= this.speed;     
+    this.updatePosition();    
   }
 
   isOffScreen() {
-    return this.x + this.width < 0;   // true once the lion has fully left the left side
+    return this.x + this.width < 0;   
   }
 
-  updatePosition() {                           // Method to refres lion's position
-    this.element.style.left = `${this.x}px`;   // Horizontal position
-    this.element.style.top = `${this.y}px`;    // Vertical position
+  updatePosition() {                           
+    this.element.style.left = `${this.x}px`;   
+    this.element.style.top = `${this.y}px`;    
   }
 
   remove() {
-    this.element.remove();    // delete the lion's div from the page
+    this.element.remove();    
   }
 }
